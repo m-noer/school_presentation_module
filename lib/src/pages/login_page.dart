@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_domain_module/school_domain_module.dart';
-import 'package:school_presentation_module/school_presentation_module.dart';
 import 'package:school_presentation_module/src/blocs/bloc.dart';
+import 'package:school_presentation_module/src/di/injection_container.dart';
 
 class LoginPage extends StatefulWidget {
   @override
