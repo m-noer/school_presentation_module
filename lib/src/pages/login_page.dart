@@ -23,24 +23,38 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text("Login"),
         ),
-        body: ListView(
+        body: Stack(
           children: [
-            TextField(
-              controller: usernameC,
+            ListView(
+              children: [
+                TextField(
+                  controller: usernameC,
+                ),
+                TextField(
+                  controller: passwordC,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    loginBloc.add(
+                      RequestLoginEvent(
+                        LoginBodyEntity(usernameC.text, passwordC.text),
+                      ),
+                    );
+                  },
+                  child: Text("Login"),
+                )
+              ],
             ),
-            TextField(
-              controller: passwordC,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                loginBloc.add(
-                  RequestLoginEvent(
-                    LoginBodyEntity(usernameC.text, passwordC.text),
-                  ),
-                );
+            BlocBuilder<LoginBloc, LoginState>(
+              builder: (context, state) {
+                if (state is LoginLoading) {
+                  return CircularProgressIndicator();
+                } else if (state is LoginFailure) {
+                  return Text(state.message);
+                }
+                return SizedBox();
               },
-              child: Text("Login"),
-            )
+            ),
           ],
         ),
       ),
