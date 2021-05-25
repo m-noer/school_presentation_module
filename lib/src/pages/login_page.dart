@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_domain_module/school_domain_module.dart';
 import 'package:school_presentation_module/src/blocs/bloc.dart';
-import 'package:school_presentation_module/src/di/injection_container.dart';
+import 'package:school_presentation_module/src/di/injection_container.dart'
+    as di;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final usernameC = TextEditingController();
   final passwordC = TextEditingController();
-  final loginBloc = inject<LoginBloc>();
+  final loginBloc = di.inject<LoginBloc>();
 
   @override
   Widget build(BuildContext context) {
