@@ -17,34 +17,33 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("Login"),
-          ),
-          body: ListView(
-            children: [
-              TextField(
-                controller: usernameC,
-              ),
-              TextField(
-                controller: passwordC,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  loginBloc.add(
-                    RequestLoginEvent(
-                      LoginBodyEntity(usernameC.text, passwordC.text),
-                    ),
-                  );
-                },
-                child: Text("Login"),
-              )
-            ],
-          ),
-        );
-      },
+    return BlocProvider(
+      create: (context) => loginBloc,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Login"),
+        ),
+        body: ListView(
+          children: [
+            TextField(
+              controller: usernameC,
+            ),
+            TextField(
+              controller: passwordC,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                loginBloc.add(
+                  RequestLoginEvent(
+                    LoginBodyEntity(usernameC.text, passwordC.text),
+                  ),
+                );
+              },
+              child: Text("Login"),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
